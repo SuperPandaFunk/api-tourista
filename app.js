@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', (process.env.PORT || 3000));
 // Connect to Mongoose
-//mongoose.connect('mongodb://localhost/tourista');
+mongoose.connect('mongodb://SuperPandaFunk:zaq1xsw2@ds125469.mlab.com:25469/tourista');
 const db = mongoose.connection;
 
 
