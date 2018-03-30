@@ -45,7 +45,7 @@ const Location = module.exports = mongoose.model('Location',locationSchema);
 
 module.exports.getLocations = (callback, limit) =>
 {
-    Location.find({},'-Images',callback).populate('postedBy').populate('Comments.postedBy').limit(limit);
+    Location.find({},'-Images -Comments',callback).populate('postedBy').populate('Comments.postedBy').limit(limit);
 }
 
 module.exports.getLocationById = (loc,callback) => {
