@@ -30,12 +30,11 @@ const locationSchema = mongoose.Schema({
                 ref: 'User'
             }
         }],
-        Images:[{
-            img:{
-                data: String,
-                contentType: String
-            }
-        }]
+        Images:[
+            {
+            img: String
+        }
+    ]
 });
 
 
