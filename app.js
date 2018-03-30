@@ -99,7 +99,7 @@ app.post('/api/locations/image/:_locationId', (req, res, next) => {
         fstream.on('close', function () {
             var a = {
                 img:{
-                data: Buffer,
+                data: String,
                 contentType: String
             }}
 
