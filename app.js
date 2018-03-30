@@ -81,7 +81,7 @@ app.post('/api/locations/comment/:_locationId', (req, res) => {
     });
 });
 
-app.post('/api/locations/image2/:_locationId', (req, res, next) => {
+app.post('/api/locations/image/:_locationId', (req, res, next) => {
     var fstream;
     
     req.pipe(req.busboy);
@@ -98,7 +98,7 @@ app.post('/api/locations/image2/:_locationId', (req, res, next) => {
         var loc = req.params._locationId;
         fstream.on('close', function () {
             var a = {
-                img:{}
+                img:String
             }
 
             a.img = base64_encode(pathToimg);
@@ -111,16 +111,6 @@ app.post('/api/locations/image2/:_locationId', (req, res, next) => {
     });
 });
 
-app.post('/api/locations/image/:_locationId', (req, res, next) => {
-    var image = req.body;
-    var loc = req.params._locationId;
-    Location.findByIdAndUpdate({ _id: loc }, { $push: { Images: image } }, function (err, response) {
-        a = {
-            success: true
-        }
-        res.json(a);
-    })
-});
 
 function base64_encode(file) {
     // read binary data
