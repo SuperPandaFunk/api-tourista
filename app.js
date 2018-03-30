@@ -103,7 +103,7 @@ app.post('/api/locations/image/:_locationId', (req, res, next) => {
                 contentType: String
             }}
 
-            a.img.data = fs.readFileSync(pathToimg);
+            a.img.data = base64_encode(pathToimg);
             a.img.contentType = 'image/png';
             
             
@@ -116,6 +116,12 @@ app.post('/api/locations/image/:_locationId', (req, res, next) => {
 });
 
 
+function base64_encode(file) {
+    // read binary data
+    var bitmap = fs.readFileSync(file);
+    // convert binary data to base64 encoded string
+    return new Buffer(bitmap).toString('base64');
+}
 
 app.get('/api/users/fb/:_fbid', (req, res) => {
     User.getUserByFBId(req.params._fbid, function (err, user) {
