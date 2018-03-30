@@ -103,8 +103,7 @@ app.post('/api/locations/image/:_locationId', (req, res, next) => {
 
             a.img = base64_encode(pathToimg);
             Location.findByIdAndUpdate({_id:loc},{$push:{Images:a}},function(err,response){
-                res.contentType('image/png');
-                res.send(a);
+                res.json({success:true});
             })
         });
         
