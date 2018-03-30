@@ -39,6 +39,15 @@ app.get('/api/locations', (req,res) =>{
     });
 });
 
+app.get('/api/locations/:_locationId', (req, res) => {
+    Location.getLocationById(req.params._locationId,function (err, locations) {
+        if (err) {
+            throw err;
+        }
+        res.json(locations);
+    });
+});
+
 app.get('/api/locations/near/:_max/:_lat/:_lon', (req, res) => {
     Location.getLocations(function (err, locations) {
         if (err) {

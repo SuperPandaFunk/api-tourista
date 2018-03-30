@@ -48,6 +48,11 @@ module.exports.getLocations = (callback, limit) =>
     Location.find(callback).populate('postedBy').populate('Comments.postedBy').limit(limit);
 }
 
+module.exports.getLocationById = (loc,callback) => {
+    Location.findById(loc, callback).populate('postedBy').populate('Comments.postedBy')
+}
+
+
 
 // Add locations
 
