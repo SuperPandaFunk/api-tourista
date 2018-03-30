@@ -32,7 +32,7 @@ const locationSchema = mongoose.Schema({
         }],
         Images:[{
             img:{
-                data: Buffer,
+                data: String,
                 contentType: String
             }
         }]

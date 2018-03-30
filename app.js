@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Location = require('./models/locations');
 const User = require('./models/users');
-const image2base64 = require('image-to-base64');
 
 var busboy = require('connect-busboy'); //middleware for form/file upload
 var path = require('path');     //used for file path
@@ -104,21 +103,24 @@ app.post('/api/locations/image/:_locationId', (req, res, next) => {
                 contentType: String
             }}
 
-            image2base64(pathToimg).then((resp) =>{
-                a.img.data = resp;
-                a.img.contentType = 'image/png';
-                Location.findByIdAndUpdate({ _id: loc }, { $push: { Images: a } }, function (err, response) {
-                    res.send(a);
-                })
-            });
-            
-            
-            
-
+            a.img.data = base64_encode(pathToimg);
+            a.img.contentType = 'image/png';
+            Location.findByIdAndUpdate({_id:loc},{$push:{Images:a}},function(err,response){ 
+                res.send(a.img.data);
+            })
         });
         
     });
 });
+
+
+function base64_encode(file) {
+    // read binary data
+    var bitmap = fs.readFileSync(file);
+    // convert binary data to base64 encoded string
+    
+    return bitmap.toString('base64');
+}
 
 app.get('/api/users/fb/:_fbid', (req, res) => {
     User.getUserByFBId(req.params._fbid, function (err, user) {
