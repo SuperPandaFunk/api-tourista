@@ -114,7 +114,10 @@ app.post('/api/locations/image2/:_locationId', (req, res, next) => {
 app.post('/api/locations/image/:_locationId', (req, res, next) => {
     var image = req.body;
     Location.findByIdAndUpdate({ _id: loc }, { $push: { Images: image } }, function (err, response) {
-        res.send('success');
+        a = {
+            success: true
+        }
+        res.json(a);
     })
 });
 
